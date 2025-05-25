@@ -7,10 +7,21 @@ const Header: React.FC = () => (
       <div className="flex justify-between items-center h-16">
         <div className="shrink-0">
           <h1 className="text-2xl font-bold text-gray-800">
-            مركز ريري للتجميل
+            <Link href={"/"} className="text-primary">
+              مركز ريري للتجميل
+            </Link>{" "}
           </h1>
         </div>
         <nav className="hidden md:flex space-x-10  ml-10">
+          <Link href="/" className="text-gray-500 hover:text-gray-900">
+            الرئيسية
+          </Link>
+          <Link
+            href="/make-appointment"
+            className="text-gray-500 hover:text-gray-900"
+          >
+            احجز الاَن
+          </Link>
           <Link href="#services" className="text-gray-500 hover:text-gray-900">
             الخدمات
           </Link>
