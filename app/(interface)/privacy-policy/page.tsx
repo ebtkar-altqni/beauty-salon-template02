@@ -1,7 +1,35 @@
-import React from "react";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
+import Link from "next/link";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "سياسة الخصوصية | مركز ريري للتجميل",
+  description:
+    "تعرف على كيفية جمع واستخدام وحماية بياناتك في مركز ريري للتجميل.",
+};
 
 const PrivacyPolicy: React.FC = () => (
   <div className="max-w-3xl mx-auto py-10 px-4" dir="rtl" lang="ar">
+    <Breadcrumb className="my-2" dir="rtl">
+      <BreadcrumbList>
+        <BreadcrumbItem>
+          <BreadcrumbLink asChild>
+            <Link href={`/`}>الرئيسية</Link>
+          </BreadcrumbLink>
+        </BreadcrumbItem>
+        <BreadcrumbSeparator />
+        <BreadcrumbItem>
+          <BreadcrumbPage>سياسة الخصوصية</BreadcrumbPage>
+        </BreadcrumbItem>
+      </BreadcrumbList>
+    </Breadcrumb>
     <h1 className="text-3xl font-bold mb-4">سياسة الخصوصية</h1>
     <p className="mb-4">
       في مركز ريري للتجميل، خصوصيتك مهمة لنا. توضح سياسة الخصوصية هذه كيف نجمع

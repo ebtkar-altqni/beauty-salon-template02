@@ -1,5 +1,4 @@
-import Image from "next/legacy/image";
-import React from "react";
+import RemoteImage from "./remote-image";
 
 function ClipPathImage({ imageSrc }: { imageSrc: string }) {
   return (
@@ -21,7 +20,7 @@ function ClipPathImage({ imageSrc }: { imageSrc: string }) {
         style={{ clipPath: "url(#clip-mask6)" }}
         className="overflow-hidden h-56"
       >
-        <Image
+        <RemoteImage
           width={400}
           height={400}
           src={imageSrc ?? "/test.jpg"}

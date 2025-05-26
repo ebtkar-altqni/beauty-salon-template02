@@ -9,12 +9,12 @@ const ContactSection: React.FC = () => (
     <div className="container md:px-14 px-2 mx-auto text-center">
       <h2 className="text-3xl font-bold mb-6">تواصل معنا</h2>
       <p className="mb-8">
-        يسعدنا تواصلكم معنا! يرجى تعبئة النموذج أدناه أو التواصل عبر قنواتس
+        يسعدنا تواصلكم معنا! يرجى تعبئة النموذج أدناه أو التواصل عبر قنوات
         التواصل الاجتماعي.
       </p>
-      <div className="flex justify-between w-full items-center">
+      <div className="flex max-sm:flex-col max-sm:gap-10 justify-between w-full items-center">
         {" "}
-        <form className="bg-background px-6 py-8 rounded-2xl min-w-1/2 shadow-md">
+        <form className="bg-background max-sm:w-full px-6 py-8 rounded-2xl min-w-1/2 shadow-md">
           <div className="mb-4">
             <Label
               htmlFor="name"

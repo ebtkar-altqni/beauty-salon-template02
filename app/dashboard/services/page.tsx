@@ -9,10 +9,10 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import Link from "next/link";
-// import { CreateFacultyMemberForm } from "./components/forms";
 import { getServices } from "@/database/services";
 import ServicesCols from "./components/services-cols";
 import type { Metadata } from "next";
+import { CustomLink } from "@/components/custom-link";
 
 export const metadata: Metadata = {
   title: "إدارة الخدمات | لوحة التحكم",
@@ -44,7 +44,9 @@ const page = async () => {
             </BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>
-        {/* <CreateFacultyMemberForm /> */}
+        <CustomLink variant={"default"} href={"/dashboard/services/new"}>
+          إضافة خدمة جديدة
+        </CustomLink>
       </div>
       <div className=" my-4 md:container md:px-8">
         <Suspense fallback={"جاري التحميل"}>

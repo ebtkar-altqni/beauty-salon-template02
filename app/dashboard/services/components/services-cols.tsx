@@ -11,9 +11,9 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import NotFoundTable from "@/components/not-found-table";
-import Image from "next/image";
 import Link from "next/link";
 import { Service } from "@/generated/prisma";
+import RemoteImage from "@/components/remote-image";
 
 const ServicesCols: ColumnDef<Service>[] = [
   {
@@ -22,8 +22,11 @@ const ServicesCols: ColumnDef<Service>[] = [
     cell: ({ row }) => {
       const image = row.original?.poster;
       return image ? (
-        <div className="overflow-hidden rounded-md h-12 w-12 aspect-square">
-          <Image
+        <div
+          className="overflow-hi
+        dden rounded-md h-12 w-12 aspect-square"
+        >
+          <RemoteImage
             src={image}
             alt={`${row.original.title}-image`}
             width={100}
