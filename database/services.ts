@@ -3,7 +3,6 @@
 import prisma from "@/lib/db";
 import { unstable_cache } from "next/cache";
 import { revalidateTag } from "next/cache";
-import { generateUniqueSlug } from "@/lib/slug";
 
 // Tag for cache revalidation
 const SERVICES_TAG = "services";
@@ -22,19 +21,31 @@ export const getServices = unstable_cache(
   { tags: [SERVICES_TAG] }
 );
 
+// Get a single service by ID
+export async function getServiceById(id: string) {
+  try {
+    const service = await prisma.service.findUnique({
+      where: { id },
+    });
+    return service ?? undefined;
+  } catch (error) {
+    console.error("خطأ أثناء جلب الخدمة:", error);
+    return undefined;
+  }
+}
+
 // Create a new service
 export async function createService(data: {
   title: string;
   info: string;
   body?: string;
   poster: string;
+  price: number;
 }): Promise<{ message: string }> {
   try {
-    const slug = await generateUniqueSlug(data.title);
     const service = await prisma.service.create({
       data: {
         ...data,
-        slug,
       },
     });
     if (!service) {
@@ -56,17 +67,13 @@ export async function updateService(
     info: string;
     body?: string;
     poster: string;
-    slug: string;
+    price: number;
   }
 ): Promise<{ message: string }> {
   try {
-    const updateData = { ...data };
-    if (data.title) {
-      updateData.slug = await generateUniqueSlug(data.title);
-    }
     const service = await prisma.service.update({
       where: { id },
-      data: updateData,
+      data,
     });
     if (!service) {
       return { message: "فشل في تحديث الخدمة" };

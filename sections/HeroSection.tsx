@@ -15,8 +15,8 @@ const HeroSection: React.FC = () => {
         priority
         className="z-0 object-cover"
       />
-      <div className=" inset-0 bg-black/80 w-full h-full z-10 flex flex-col items-center justify-center">
-        <h1 className="text-5xl font-bold mb-4 text-white">
+      <div className="max-sm:text-center inset-0 bg-black/80 w-full h-full z-10 flex flex-col items-center justify-center">
+        <h1 className="text-5xl/normal font-bold mb-4 text-white ">
           مرحباً بكم في مركز ريري للتجميل
         </h1>
         <p className="text-lg mb-8 text-white">

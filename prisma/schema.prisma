@@ -10,11 +10,12 @@ datasource db {
 
 model Service {
   id           String        @id @default(auto()) @map("_id") @db.ObjectId
-  slug         String        @unique
+  // slug         String        @unique
   title        String
   info         String
   body         String?
   poster       String
+  price        Int
   Appointments Appointment[]
 }
 

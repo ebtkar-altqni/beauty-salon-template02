@@ -126,11 +126,11 @@ export function ResponsiveDialogWithCustomOpenFuncionality({
           )}
         </DrawerHeader>
         {children}
-        <DrawerFooter className="pt-2">
+        {/* <DrawerFooter className="pt-2">
           <DrawerClose asChild>
             <Button variant="outline">تجاهل</Button>
           </DrawerClose>
-        </DrawerFooter>
+        </DrawerFooter> */}
       </DrawerContent>
     </Drawer>
   );

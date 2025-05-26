@@ -14,6 +14,7 @@ import NotFoundTable from "@/components/not-found-table";
 import Link from "next/link";
 import { Service } from "@/generated/prisma";
 import RemoteImage from "@/components/remote-image";
+import { DeleteServiceForm } from "./forms";
 
 const ServicesCols: ColumnDef<Service>[] = [
   {
@@ -31,7 +32,7 @@ const ServicesCols: ColumnDef<Service>[] = [
             alt={`${row.original.title}-image`}
             width={100}
             height={100}
-            className="w-full h-full object-cover"
+            className="w-full h-full rounded-md object-cover"
           />
         </div>
       ) : (
@@ -43,6 +44,11 @@ const ServicesCols: ColumnDef<Service>[] = [
     accessorKey: "الاسم",
     header: "الاسم",
     cell: ({ row }) => <div>{row.original?.title ?? "لايوجد"}</div>,
+  },
+  {
+    accessorKey: "السعر",
+    header: "السعر",
+    cell: ({ row }) => <div>{row.original?.price ?? "لايوجد"} دينار</div>,
   },
   {
     accessorKey: "معلومات بسيطة",
@@ -66,7 +72,12 @@ const ServicesCols: ColumnDef<Service>[] = [
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>الأحداث</DropdownMenuLabel>
             <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
-              <Link href={`/dashboard/services/edit/${service.id}`}>تحديث</Link>
+              <Link href={`/dashboard/services/edit/${service.id}`}>
+                تحديث الخدمة
+              </Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
+              <DeleteServiceForm id={service.id} />
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

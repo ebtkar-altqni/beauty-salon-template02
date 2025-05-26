@@ -16,6 +16,7 @@ export async function createServiceAction(
       info: z.string().min(3, "معلومات الخدمة مطلوبة"),
       body: z.string().optional(),
       poster: z.string().min(1, "رابط صورة الخدمة مطلوب"),
+      price: z.coerce.number().min(0, "سعر الخدمة مطلوب"),
     });
 
     const data = schema.safeParse({
@@ -23,6 +24,7 @@ export async function createServiceAction(
       info: formData.get("info") || "",
       body: formData.get("body") || "",
       poster: formData.get("poster") || "",
+      price: formData.get("price") || "",
     });
 
     if (!data.success) {
@@ -31,8 +33,8 @@ export async function createServiceAction(
       };
     }
 
-    const { title, info, body, poster } = data.data;
-    const res = await createService({ title, info, body, poster });
+    const { title, info, body, poster, price } = data.data;
+    const res = await createService({ title, info, body, poster, price });
     return { message: res.message };
   } catch (error) {
     console.error("خطأ أثناء إنشاء الخدمة:", error);
@@ -52,7 +54,7 @@ export async function updateServiceAction(
       info: z.string().min(3, "معلومات الخدمة مطلوبة"),
       body: z.string().optional(),
       poster: z.string().min(1, "رابط صورة الخدمة مطلوب"),
-      slug: z.string().min(1, "عنوان الخدمة المميز مطلوب"),
+      price: z.coerce.number().min(0, "سعر الخدمة مطلوب"),
     });
 
     const data = schema.safeParse({
@@ -61,7 +63,7 @@ export async function updateServiceAction(
       info: formData.get("info") || "",
       body: formData.get("body") || "",
       poster: formData.get("poster") || "",
-      slug: formData.get("slug") || "",
+      price: formData.get("price") || "",
     });
 
     if (!data.success) {
@@ -70,8 +72,8 @@ export async function updateServiceAction(
       };
     }
 
-    const { id, title, info, body, poster, slug } = data.data;
-    const res = await updateService(id, { title, info, body, poster, slug });
+    const { id, title, info, body, poster, price } = data.data;
+    const res = await updateService(id, { title, info, body, poster, price });
     return { message: res.message };
   } catch (error) {
     console.error("خطأ أثناء تحديث الخدمة:", error);
