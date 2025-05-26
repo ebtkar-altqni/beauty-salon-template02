@@ -1,4 +1,5 @@
-import React from "react";
+import MobileNav from "@/app/(interface)/components/mobile-nav";
+import { navLinks } from "@/lib/constants";
 import Link from "next/link";
 
 const Header: React.FC = () => (
@@ -13,29 +14,17 @@ const Header: React.FC = () => (
           </h1>
         </div>
         <nav className="hidden md:flex space-x-10  ml-10">
-          <Link href="/" className="text-gray-500 hover:text-gray-900">
-            الرئيسية
-          </Link>
-          <Link
-            href="/make-appointment"
-            className="text-gray-500 hover:text-gray-900"
-          >
-            احجز الاَن
-          </Link>
-          <Link href="#services" className="text-gray-500 hover:text-gray-900">
-            الخدمات
-          </Link>
-          <Link href="#about" className="text-gray-500 hover:text-gray-900">
-            من نحن
-          </Link>
-
-          {/* <Link href="#gallery" className="text-gray-500 hover:text-gray-900">
-            المعرض
-          </Link> */}
-          <Link href="#contact" className="text-gray-500 hover:text-gray-900">
-            تواصل معنا
-          </Link>
+          {navLinks.map((link, i) => (
+            <Link
+              key={i}
+              href={link.href}
+              className="text-gray-500 hover:text-gray-900"
+            >
+              {link.label}
+            </Link>
+          ))}
         </nav>
+        <MobileNav />
       </div>
     </div>
   </header>
