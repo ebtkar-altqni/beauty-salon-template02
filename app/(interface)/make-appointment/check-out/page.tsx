@@ -10,7 +10,6 @@ import {
 import Link from "next/link";
 import { getServiceById } from "@/database/services";
 import { CreateAppiontmentForm } from "../../components/forms";
-import { getClientIP } from "@/lib/get-ip";
 
 export const metadata = {
   title: "إتمام الحجز | مركز ريري للتجميل",
@@ -22,18 +21,6 @@ const CheckOutAppointmentPage = async ({
 }: {
   searchParams: Promise<{ id?: string }>;
 }) => {
-  const ip = await getClientIP();
-  console.log(ip);
-  if (ip) {
-    return (
-      <div className="p-6 border rounded-lg max-w-sm mx-auto">
-        <h2 className="text-lg font-semibold mb-2">Client Information</h2>
-        <p className="text-sm text-muted-foreground">
-          Your IP: <span className="font-mono">{ip || "Unknown"}</span>
-        </p>
-      </div>
-    );
-  }
   const serviceId = (await searchParams)?.id;
   const service = await getServiceById(serviceId || "");
 

@@ -4,6 +4,7 @@ import {
   updateAppointment,
   deleteAppointment,
 } from "@/database/appointments";
+import { getClientIP } from "@/lib/get-ip";
 
 // Simple in-memory rate limit (good enough for small sites)
 const ipSubmissions = new Map<string, number>();
@@ -46,11 +47,11 @@ export async function createAppointmentAction(
     }
 
     // 🛡️ Rate limit based on IP
-    const ip = (formData.get("ip") as string) || "unknown";
+    const ip = (await getClientIP()) || "unknown";
     const now = Date.now();
     const lastSubmission = ipSubmissions.get(ip);
     if (lastSubmission && now - lastSubmission < 30_000) {
-      return { message: "Please wait before submitting again." };
+      return { message: "يرجى الانتظار قبل إرسال طلب آخر" };
     }
     ipSubmissions.set(ip, now);
 
