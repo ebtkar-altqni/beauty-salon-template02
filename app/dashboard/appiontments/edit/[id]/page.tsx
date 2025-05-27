@@ -25,9 +25,9 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }): Promise<Metadata> {
-  const appointment = await getAppointmentById(params.id);
+  const appointment = await getAppointmentById((await params).id);
   return {
     title: appointment
       ? `تعديل الموعد: ${appointment.name} | لوحة التحكم`
@@ -38,8 +38,12 @@ export async function generateMetadata({
   };
 }
 
-const EditAppointmentPage = async ({ params }: { params: { id: string } }) => {
-  const { id } = params;
+const EditAppointmentPage = async ({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) => {
+  const { id } = await params;
   const appointment = await getAppointmentById(id);
   if (!appointment) {
     return notFound();
