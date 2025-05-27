@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/breadcrumb";
 import Link from "next/link";
 import type { Metadata } from "next";
+import { CustomLink } from "@/components/custom-link";
 
 // Generate static params for dynamic routes
 export async function generateStaticParams() {
@@ -44,11 +45,7 @@ const ServicePage = async ({ params }: { params: Promise<{ id: string }> }) => {
   }
   return (
     <main>
-      <div
-        className="max-w-3xl mx-auto py-10 px-4 min-h-[75vh]"
-        dir="rtl"
-        lang="ar"
-      >
+      <div className="max-w-3xl mx-auto py-10 px-4" dir="rtl" lang="ar">
         <Breadcrumb className="my-2" dir="rtl">
           <BreadcrumbList>
             <BreadcrumbItem>
@@ -73,6 +70,13 @@ const ServicePage = async ({ params }: { params: Promise<{ id: string }> }) => {
             <p>{service.body}</p>
           </div>
         )}
+        <CustomLink
+          variant={"default"}
+          href={`/make-appointment/check-out?id=${service.id}`}
+          className="w-full mt-6"
+        >
+          احجز الاَن
+        </CustomLink>
       </div>
     </main>
   );

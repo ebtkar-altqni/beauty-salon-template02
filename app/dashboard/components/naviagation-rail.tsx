@@ -2,23 +2,25 @@
 import { Sidebar, Menu, sidebarClasses } from "react-pro-sidebar";
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { FaBars, FaFileInvoice } from "react-icons/fa6";
-import {
-  MdOutlineCategory,
-  MdOutlineInventory2,
-  MdDesignServices,
-} from "react-icons/md";
+import { FaBars } from "react-icons/fa6";
+import { MdAttachEmail, MdDesignServices } from "react-icons/md";
 import { IconType } from "react-icons/lib";
 import { GoHome } from "react-icons/go";
 import Link from "next/link";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { HiMiniBars2 } from "react-icons/hi2";
-import { IoSettingsOutline } from "react-icons/io5";
+// import { IoSettingsOutline } from "react-icons/io5";
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
+import { CiCalendarDate } from "react-icons/ci";
 
 // Navigation items array for sidebar and sheet
-const navigationItems = [
+const navigationItems: {
+  href: string;
+  name: string;
+  Icon: IconType;
+  home?: boolean; // Optional property to indicate if it's a home item
+}[] = [
   {
     href: "/dashboard",
     name: "لوحة التحكم",
@@ -31,25 +33,21 @@ const navigationItems = [
     Icon: MdDesignServices,
   },
   {
-    href: "/dashboard/categories",
-    name: "الأصناف",
-    Icon: MdOutlineCategory,
+    href: "/dashboard/appiontments",
+    name: "المواعيد",
+    Icon: CiCalendarDate,
   },
   {
-    href: "/dashboard/inventory",
-    name: "المخزون",
-    Icon: MdOutlineInventory2,
+    Icon: MdAttachEmail,
+    href: "/dashboard/contacts",
+    name: "الرسائل",
   },
-  {
-    href: "/dashboard/orders",
-    name: "الطلبيات",
-    Icon: FaFileInvoice,
-  },
-  {
-    href: "/dashboard/settings",
-    name: "الإعدادات",
-    Icon: IoSettingsOutline,
-  },
+
+  // {
+  //   href: "/dashboard/settings",
+  //   name: "الإعدادات",
+  //   Icon: IoSettingsOutline,
+  // },
 ];
 
 // NavigationRailItem component

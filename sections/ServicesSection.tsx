@@ -1,21 +1,23 @@
 import React from "react";
-// import Image from "next/image";
 import ClipPathImage from "@/components/ClipPathImage";
 import { getServices } from "@/database/services";
-import { Button } from "@/components/ui/button";
 import { CustomLink } from "@/components/custom-link";
 
 const ServicesSection: React.FC = async () => {
   const services = await getServices();
   return (
-    <section id="services" className="py-16 bg-background container" dir="rtl">
-      <div className="container md:px-14 px-2 mx-auto text-center">
+    <section
+      id="services"
+      className="py-16 bg-background max-w-3xl mx-auto"
+      dir="rtl"
+    >
+      <div className="md:px-14 px-2 mx-auto text-center">
         <h2 className="text-3xl font-bold mb-8">خدماتنا</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
           {services.map((service, index) => (
             <div
               key={index}
-              className="bg-background p-6 text-start rounded-2xl shadow-md"
+              className="bg-background p-6 text-start rounded-t-[36px] rounded-b-md shadow-md"
             >
               <ClipPathImage imageSrc={service.poster} />
               <div className="flex justify-between  items-end">
@@ -33,7 +35,13 @@ const ServicesSection: React.FC = async () => {
                 >
                   معرفة المزيد
                 </CustomLink>
-                <Button className="w-1/2">احجز الاَن</Button>
+                <CustomLink
+                  variant={"default"}
+                  href={`/make-appointment/check-out?id=${service.id}`}
+                  className="w-1/2"
+                >
+                  احجز الاَن
+                </CustomLink>
               </div>
             </div>
           ))}

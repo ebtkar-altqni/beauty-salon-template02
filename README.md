@@ -1,38 +1,138 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Riri Beauty Center – Beauty Center Template
 
-## Getting Started
+A modern web interface for a beauty center built with Next.js, TypeScript, and Tailwind CSS. Includes an admin dashboard, appointment booking, file uploads, and MongoDB integration via Prisma.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 🖼️ Overview
+
+This project offers a complete website for a beauty center, including:
+
+- A homepage introducing services and promotions.
+- An appointment booking page linked to available services.
+- An admin dashboard to manage services and appointments.
+- Image and PDF upload functionality via UploadThing.
+- Fully responsive design with RTL (Arabic) support.
+
+---
+
+## 🏗️ Project Structure
+
+```
+.
+├── app/             # Next.js pages (frontend and dashboard)
+├── components/      # Reusable UI components
+├── database/        # Prisma database queries
+├── generated/       # Prisma Client generated files
+├── hooks/           # Custom React hooks
+├── lib/             # Utility functions and helpers
+├── prisma/          # Database schema (schema.prisma)
+├── public/          # Static files (images, icons, etc.)
+├── sections/        # Homepage sections (Hero, About, Services, Contact, etc.)
+├── styles/          # CSS files
+├── package.json     # Project metadata and scripts
+└── README.md        # This file
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🚀 Getting Started
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 1. Install Dependencies
 
-## Learn More
+```sh
+npm install
+```
 
-To learn more about Next.js, take a look at the following resources:
+### 2. Configure the Database
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Ensure the `.env` file contains the `DATABASE_URL` variable pointing to your MongoDB database.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 3. Generate Prisma Client
 
-## Deploy on Vercel
+```sh
+npx prisma generate
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 4. Run Development Server
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-# beauty-salon-template02
-# beauty-salon-template02
+```sh
+npm run dev
+```
+
+### 5. Build for Production
+
+```sh
+npm run build
+```
+
+### 6. Start Production Server
+
+```sh
+npm start
+```
+
+### 7. Run Linter
+
+```sh
+npm run lint
+```
+
+---
+
+## ⚙️ Technologies Used
+
+- **Next.js** – React framework for modern UIs
+- **TypeScript** – Type-safe, maintainable code
+- **Tailwind CSS** – Rapid, responsive styling
+- **Prisma** – Modern ORM for MongoDB
+- **UploadThing** – Easy file and image uploads
+- **React Icons** – Ready-to-use icons
+- **Sonner** – Interactive notifications
+- **Radix UI** – Advanced UI components
+
+---
+
+## 🗃️ Database
+
+Uses MongoDB with Prisma.  
+Main models include:
+
+- `Service`: Represents a beauty service (name, description, image, price, etc.)
+- `Appointment`: Represents a booking (client name, phone, date, service, etc.)
+
+See `prisma/schema.prisma` for full model definitions.
+
+---
+
+## 📦 npm Scripts
+
+| Command         | Description                        |
+| --------------- | ---------------------------------- |
+| `npm install`   | Install all dependencies           |
+| `npm run dev`   | Start development server           |
+| `npm run build` | Build for production               |
+| `npm start`     | Start production server            |
+| `npm run lint`  | Run linter and code quality checks |
+
+---
+
+## 📝 Notes
+
+- Fully RTL-compatible (Arabic support)
+- Customizable design and colors via Tailwind and `globals.css`
+- Dashboard available at `/dashboard`
+- File/image uploads handled by UploadThing (see `components/custom-dropzone.tsx`)
+
+---
+
+## 📄 License
+
+This project is for educational purposes and can be modified as needed.
+
+---
+
+## ✨ Contributions
+
+All contributions and suggestions are welcome!  
+Feel free to open an issue or pull request via GitHub.

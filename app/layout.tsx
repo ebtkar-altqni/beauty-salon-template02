@@ -1,8 +1,8 @@
-import "./globals.css";
 import { ReactNode } from "react";
 import { Cairo } from "next/font/google";
 import { cn } from "@/lib/utils";
 import { Toaster } from "@/components/ui/sonner";
+import "./globals.css";
 
 const cairo = Cairo({
   weight: "400",

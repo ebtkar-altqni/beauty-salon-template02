@@ -1,5 +1,5 @@
 "use client";
-
+import useLocalStorageState from "use-local-storage-state";
 import * as React from "react";
 import {
   ColumnDef,
@@ -32,6 +32,21 @@ import {
 } from "@/components/ui/table";
 import SearchInput from "./search";
 import { cn } from "@/lib/utils";
+// import LangRenderer from "@/components/lang";
+
+type ReusableTableProps<T> = {
+  data?: T[];
+  defaultColumnVisibility?: VisibilityState;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  columns?: ColumnDef<T, any>[];
+  filter?: React.ReactNode;
+  searchQuery?: string;
+  children?: React.ReactNode;
+  className?: string;
+  showSearch?: boolean;
+  searchPlaceholder?: string;
+  tableKey?: string;
+};
 
 export default function ReusableTable<T>({
   data = [],
@@ -43,26 +58,22 @@ export default function ReusableTable<T>({
   className,
   showSearch = true,
   searchPlaceholder = "ابحث هنا",
-}: {
-  data?: T[];
-  defaultColumnVisibility?: VisibilityState;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  columns?: ColumnDef<T, any>[];
-  filter?: React.ReactNode;
-  searchQuery?: string;
-  children?: React.ReactNode;
-  className?: string;
-  showSearch?: boolean;
-  searchPlaceholder?: string;
-}) {
+  tableKey = "key",
+}: ReusableTableProps<T>) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
   );
-  const [columnVisibility, setColumnVisibility] =
-    React.useState<VisibilityState>({
-      ...defaultColumnVisibility,
-    });
+  const [columnVisibility] = React.useState<VisibilityState>({
+    ...defaultColumnVisibility,
+  });
+  const [
+    columnVisibilityFromLocalStorage,
+    setColumnVisibilityFromLocalStorage,
+  ] = useLocalStorageState<VisibilityState>(tableKey, {
+    defaultValue: columnVisibility,
+  });
+
   const [rowSelection, setRowSelection] = React.useState({});
 
   const table = useReactTable({
@@ -74,12 +85,12 @@ export default function ReusableTable<T>({
     getPaginationRowModel: getPaginationRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
-    onColumnVisibilityChange: setColumnVisibility,
+    onColumnVisibilityChange: setColumnVisibilityFromLocalStorage,
     onRowSelectionChange: setRowSelection,
     state: {
       sorting,
       columnFilters,
-      columnVisibility,
+      columnVisibility: columnVisibilityFromLocalStorage,
       rowSelection,
     },
   });
@@ -96,7 +107,7 @@ export default function ReusableTable<T>({
         )}
 
         <div className="w-full sm:w-auto gap-1">
-          <DropdownMenu>
+          <DropdownMenu dir="rtl">
             <DropdownMenuTrigger asChild>
               <Button variant="outline" className="w-full sm:w-auto">
                 الأعمدة
@@ -111,12 +122,12 @@ export default function ReusableTable<T>({
                   return (
                     <DropdownMenuCheckboxItem
                       key={column.id}
-                      dir="rtl"
                       className="capitalize"
                       checked={column.getIsVisible()}
-                      onCheckedChange={(value) =>
-                        column.toggleVisibility(!!value)
-                      }
+                      onCheckedChange={(value) => {
+                        column.toggleVisibility(!!value);
+                        console.log(column);
+                      }}
                     >
                       {column.id}
                     </DropdownMenuCheckboxItem>
